@@ -14,7 +14,7 @@ const register = async ({ email, username, password }) => {
   const hashed = await bcrypt.hash(password, 12)
   const user = await prisma.user.create({
     data: { email, username, password: hashed },
-    select: { id: true, email: true, username: true, createdAt: true }
+    select: { id: true, email: true, username: true, role: true, createdAt: true }
   })
 
   return user
@@ -28,7 +28,7 @@ const login = async ({ email, password }) => {
   if (!match) throw { status: 401, message: 'Invalid email or password' }
 
   const token = jwt.sign(
-    { id: user.id, username: user.username, email: user.email },
+    { id: user.id, username: user.username, email: user.email, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   )

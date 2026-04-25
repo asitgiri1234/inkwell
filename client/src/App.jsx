@@ -7,7 +7,9 @@ import StoryFeed from './pages/StoryFeed'
 import StoryDetail from './pages/StoryDetail'
 import CreateStory from './pages/CreateStory'
 import MyStories from './pages/MyStories'
+import AdminDashboard from './pages/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
 
 export default function App() {
   return (
@@ -24,6 +26,9 @@ export default function App() {
         } />
         <Route path="/my-stories" element={
           <ProtectedRoute><MyStories /></ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <AdminRoute><AdminDashboard /></AdminRoute>
         } />
       </Routes>
     </div>
